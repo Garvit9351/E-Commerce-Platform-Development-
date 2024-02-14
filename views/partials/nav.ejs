@@ -1,0 +1,70 @@
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary"
+  style="height: 60px;"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ecommerce</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <% if (locals.user) { %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/product/add-product">Add Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/hoodies">Hoodies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/sweatshirts">Sweatshirts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/cart/items">Cart</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Garvit Khandelwal
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/profile">Your Profile</a></li>
+            <li><a class="dropdown-item" href="/user/updateprofile">Update Profile</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+          </ul>
+        </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/user/signup">Create Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/user/signin">Signin</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% if(locals.error) { %>
+<div class="container mt-4">
+  <div class="alert alert-danger" role="alert"><%= locals.error %></div>
+</div>
+<% } %>

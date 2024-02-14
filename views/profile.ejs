@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <style>
+        h5 {
+            margin-top: 4px;
+            padding: 6px;
+        }
+    </style>
+    <title>Profile</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    
+    <% if (locals.user && profileDetails) { %>
+        <div class="first container mt-5" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;  display: flex; align-items: center; justify-content: space-evenly;" >
+            <div>
+                <h2><%= profileDetails.firstName %> <%= profileDetails.lastName %></h2>
+                <h6> Email: <%= user.email %></h6>
+            </div>
+                <div class='second  mt-4 mb-4' style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+                <h5> ProfileId: <%= profileDetails._id %> </h5>
+                <h5> Mobile No: <%= profileDetails.mobileNumber %></h5>
+                <h5> City: <%= profileDetails.city %></h5>
+                <h5> State: <%= profileDetails.state %></h5>
+                <h5> Pincode: <%= profileDetails.pincode %></h5>
+                <h5> Address: <%= profileDetails.fullAddress %></h5>
+                <h5> Gender: <%= profileDetails.gender %></h5>
+                </div>
+            </div>
+    <% } %>
+
+    <% if (!profileDetails) { %>
+        <div class="container mt-4">
+     <h1>Update Profile</h1>
+    </div>
+    <% } %>
+     
+    
+    <%- include("./partials/scripts") %>
+</body>
+</html>

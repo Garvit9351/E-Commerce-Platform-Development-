@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <title>Add New Product</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    <div class="container mt-3">
+        <form action="/product" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Product Image</label>
+                <input type="file" class="form-control" id="coverImage" name="coverImage" aria-describedby="coverImage">
+              </div>
+            <div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="productName" name="productName" aria-describedby="productName">
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Product Price</label>
+                <input type="number" class="form-control" id="price" name="price" aria-describedby="price">
+              </div>
+              <div class="mb-3">
+                <label for="tag" class="form-label">Tag</label>
+                <input type="text" class="form-control" id="tag" name="tag" aria-describedby="tag">
+              </div>
+              <div class="mb-3">
+                <label for="color" class="form-label">Color</label>
+                <input type="text" class="form-control" id="color" name="color" aria-describedby="color">
+              </div>
+              <div class="mb-3">
+                <label for="productDescription">Product Description</label>                
+                <textarea name="productDescription" class="form-control" id="productDescription"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="productHighlights">Product Highlights</label>                
+                <textarea name="productHighlights" class="form-control" id="productHighlights"></textarea>
+              </div>
+              <div class="mb-3">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+        </form>
+    </div>
+    <%- include("./partials/scripts") %>
+
+</body>
+</html>

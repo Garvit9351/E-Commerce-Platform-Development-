@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%- include("./partials/head") %>
+    <title>Cart</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    <% if (locals.user) { %>
+        <% cartProducts.forEach(cartProduct => { %>
+            <div class="container mt-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">    
+            <h4><%= cartProduct.productName %></h4>
+            <p><strong>Color: </strong><%= cartProduct.color %></p>
+            <pre><strong>Price: </strong><i class="fa-solid fa-indian-rupee-sign"></i><%= cartProduct.price %></pre>
+        </div>
+        <% }) %>
+        <div class="container">
+            <div id="card-element"></div>
+            <button id="buyButton" class="btn btn-lg btn-success">Buy</button>
+
+        </div>
+    <% } %>
+
+    <%- include("./partials/scripts") %>
+    <script>
+        var stripe = Stripe('your-publishable-key');
+        var elements = stripe.elements();
+        var buyButton = document.getElementById('buyButton');
+
+        var card = elements.create('card');
+        card.mount('#card-element');
+
+        buyButton.addEventListener('click', function(ev) {
+            ev.preventDefault();
+
+            stripe.confirmCardPayment('your-secret-key', {
+                payment_method: {
+                    card: card,
+                }
+            }).then(function(result) {
+                if (result.error) {
+                    console.error(result.error.message);
+                } else {
+                    if (result.paymentIntent.status === 'succeeded') {
+                        alert('Payment successful!');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

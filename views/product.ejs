@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%- include("./partials/head") %>
+    <title>Product</title>
+</head>
+<body>
+    <%- include("./partials/nav") %>
+    <div class="container mt-2" style="display: flex;">
+        <div>
+            <img src="<%= product.coverImageURL %>" width="90%" />
+           
+        </div>
+
+        <div>
+        <h1><%= product.productName %></h1>
+        <h5><strong>Product Description:</strong></h5>
+        <p><%= product.productDescription %></p>
+        <h5><strong>Product Highlights:</strong></h5>
+        <pre><%= product.productHighlights %></pre>
+        <p><strong>Color: </strong><%= product.color %></p>
+        <pre><strong>Price: </strong><i class="fa-solid fa-indian-rupee-sign"></i><%= product.price %></pre>
+       
+        <label for="myCheckbox">S:</label>
+        <input type="checkbox" id="myCheckbox" name="myCheckbox">
+        <label for="myCheckbox">M:</label>
+        <input type="checkbox" id="myCheckbox" name="myCheckbox">
+        <label for="myCheckbox">L:</label>
+        <input type="checkbox" id="myCheckbox" name="myCheckbox">
+        <label for="myCheckbox">XXl:</label>
+        <input type="checkbox" id="myCheckbox" name="myCheckbox">
+        <a class="nav-link active" href="/cart/<%= product._id %>" > <button class="btn btn-lg" style="border-radius: 30px;color: #000;background-color: #EC4899;cursor: pointer;">Add to Cart</button> </a>
+        </div>
+    </div>
+    <div class="container mt-4" >
+        <img src="<%= product.createdBy.profileImageURL %>" width="50px" />
+        <%= product.createdBy.fullName %>
+    </div>
+
+    <div class="container mt-4">
+        <h1>Comments(<%= comments.length %>)</h1>
+            <% if (locals.user) { %>
+                <form action="/product/comment/<%= product._id %>" method="post">
+                    <div class="mb-3">
+                        <input type="text" name="content" placeholder="Enter your comment" class="form-control">
+                      </div>
+                      <button class="btn btn-sm btn-primary" type="submit">Add Comment</button>
+                </form>
+                
+            <% } %>
+            <div class="container mt-4" >
+                <% comments.forEach(comment => { %>
+                    <div>
+                        <img src="<%= comment.createdBy.profileImageURL %>" width="50px" />
+                        <%= comment.createdBy.fullName %>
+                        <pre><%= comment.content %></pre>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <%- include("./partials/scripts") %>
+</body>
+</html>
